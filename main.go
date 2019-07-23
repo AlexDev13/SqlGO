@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"os"
 	"io"
+	"regexp"
+//	"io/ioutil"
 
 )
 
@@ -15,7 +17,7 @@ func main(){
 			os.Exit(1)
 		}
 	defer file.Close()
-
+	
 
 	data := make([]byte,64)
 	for{
@@ -24,7 +26,14 @@ func main(){
 				break
 			}
 			sqlData := data[:n]
-		fmt.Println(sqlData)
+	tm, err := regexp.Match("select", sqlData)
+	if tm {
+		fmt.Println("true")
+	} else {
+		fmt.Println("false")
+	}
+		//fmt.Println(string(sqlData))
+
 	}
 
 
